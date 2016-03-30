@@ -13,7 +13,19 @@ var paths = {
     views: 'app/*.html',
     styles: 'app/sass/**/*.scss',
     templates: 'app/templates/*.html',
-    jsVendors: 'app/js/vendors/**/*.*',
+    jsVendors: [
+        'app/js/vendors/**/*.*',
+        'node_modules/es6-shim/es6-shim.min.js',
+        'node_modules/systemjs/dist/system-polyfills.js',
+        'node_modules/systemjs/dist/system.js',
+        'node_modules/angular2/es6/prod/src/testing/shims_for_IE.js',
+        'node_modules/angular2/bundles/angular2-polyfills.min.js',
+        'node_modules/angular2/bundles/angular2.min.js',
+        'node_modules/angular2/bundles/router.min.js',
+        'node_modules/typescript/lib/typescript.js',
+        'node_modules/rxjs/bundles/Rx.min.js',
+        'node_modules/systemjs/dist/system.js'
+    ],
     ts: 'app/ts/*.ts'
 };
 
@@ -54,10 +66,10 @@ gulp.task('styles', function () {
 });
 
 gulp.task('jsVendors', function () {
-    return gulp.src( paths.jsVendors, {
-            base: 'app'
-        })
-        .pipe( gulp.dest('dist/app') );
+    for( var i = 0; i < paths.jsVendors.length; i++ ){
+        gulp.src( paths.jsVendors[ i ])
+            .pipe( gulp.dest('dist/app/js/vendors') );
+    }
 });
 
 gulp.task('ts', function() {
