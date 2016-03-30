@@ -6,6 +6,7 @@ var sass            = require('gulp-sass');
 var autoprefixer    = require('gulp-autoprefixer');
 var sourcemaps      = require('gulp-sourcemaps');
 var ts              = require('gulp-typescript');
+var imagemin        = require('gulp-imagemin');
 var browserSync     = require('browser-sync').create();
 var del             = require('del');
 
@@ -13,6 +14,8 @@ var paths = {
     views: 'app/*.html',
     styles: 'app/sass/**/*.scss',
     templates: 'app/templates/*.html',
+    images: 'app/img/**/*',
+    pictures: 'app/pic/**/*',
     jsVendors: [
         'app/js/vendors/**/*.*',
         'node_modules/es6-shim/es6-shim.min.js',
@@ -26,7 +29,8 @@ var paths = {
         'node_modules/rxjs/bundles/Rx.min.js',
         'node_modules/systemjs/dist/system.js'
     ],
-    ts: 'app/ts/*.ts'
+    ts: 'app/ts/*.ts',
+    fonts: 'app/fonts/**/*'
 };
 
 var tsProject = ts.createProject('tsconfig.json');
@@ -81,14 +85,32 @@ gulp.task('ts', function() {
 });
 
 gulp.task('watch', function() {
-    gulp.watch(paths.ts,        ['ts',  browserSync.reload]);
-    gulp.watch(paths.templates, ['templates',  browserSync.reload]);
-    gulp.watch(paths.styles,    ['styles', browserSync.reload]);
-    gulp.watch(paths.views,     ['views',   browserSync.reload]);
+    gulp.watch(paths.ts,        [ 'ts',         browserSync.reload ]);
+    gulp.watch(paths.templates, [ 'templates',  browserSync.reload ]);
+    gulp.watch(paths.styles,    [ 'styles',     browserSync.reload ]);
+    gulp.watch(paths.views,     [ 'views',      browserSync.reload ]);
+});
+
+gulp.task('images', function() {
+    return gulp.src(paths.images)
+        .pipe(imagemin({optimizationLevel: 5}))
+        .pipe(gulp.dest('dist/app/img'));
+});
+
+gulp.task('pictures', function() {
+    return gulp.src(paths.pictures)
+        .pipe(imagemin({optimizationLevel: 5}))
+        .pipe(gulp.dest('dist/app/pic'));
+});
+
+gulp.task('fonts', function () {
+    return gulp.src(paths.fonts, {
+        base: 'app/fonts'
+    }).pipe(gulp.dest('dist/app/fonts'));
 });
 
 function serve() {
-    return run( 'styles', 'ts', 'templates', 'jsVendors', 'views', 'serve');
+    return run( 'styles', 'ts', 'templates', 'jsVendors', 'images', 'pictures', 'views', 'fonts', 'serve');
 }
 
 gulp.task('default', ['clean'], serve());
