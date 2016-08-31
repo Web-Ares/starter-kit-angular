@@ -17,19 +17,36 @@ var paths = {
     images: 'app/img/**/*',
     pictures: 'app/pic/**/*',
     php: 'app/php/**/*',
+    rxjs: 'node_modules/rxjs/**/*.js',
+    angular: [
+        {
+            from: 'node_modules/@angular/platform-browser-dynamic/bundles/platform-browser-dynamic.umd.js',
+            to: 'dist/app/js/@angular/platform-browser-dynamic/bundles/'
+        },
+        {
+            from: 'node_modules/@angular/compiler/bundles/compiler.umd.js',
+            to: 'dist/app/js/@angular/compiler/bundles/'
+        },
+        {
+            from: 'node_modules/@angular/core/bundles/core.umd.js',
+            to: 'dist/app/js/@angular/core/bundles/'
+        },
+        {
+            from: 'node_modules/@angular/platform-browser/bundles/platform-browser.umd.js',
+            to: 'dist/app/js/@angular/platform-browser/bundles/'
+        },
+        {
+            from: 'node_modules/@angular/common/bundles/common.umd.js',
+            to: 'dist/app/js/@angular/common/bundles/'
+        }
+    ],
     jsVendors: [
         'app/js/vendors/**/*.*',
-        'node_modules/es6-shim/es6-shim.min.js',
-        'node_modules/systemjs/dist/system-polyfills.js',
-        'node_modules/systemjs/dist/system.js',
-        'node_modules/angular2/es6/prod/src/testing/shims_for_IE.js',
-        'node_modules/angular2/bundles/angular2-polyfills.min.js',
-        'node_modules/angular2/bundles/angular2.dev.js',
-        'node_modules/angular2/bundles/router.min.js',
-        'node_modules/typescript/lib/typescript.js',
-        'node_modules/rxjs/bundles/Rx.min.js',
-        'node_modules/systemjs/dist/system.js',
-        'node_modules/angular2/bundles/http.dev.js'
+        'node_modules/core-js/client/shim.min.js',
+        'node_modules/zone.js/dist/zone.js',
+        'node_modules/reflect-metadata/Reflect.js',
+        'node_modules/systemjs/dist/system.src.js',
+        'systemjs.config.js'
     ],
     ts: 'app/ts/**/*.ts',
     fonts: 'app/fonts/**/*'
@@ -71,6 +88,13 @@ gulp.task('styles', function () {
         .pipe(browserSync.stream());
 });
 
+gulp.task('angular', function () {
+    for( var i = 0; i < paths.angular.length; i++ ){
+        gulp.src( paths.angular[ i ].from)
+            .pipe( gulp.dest( paths.angular[ i ].to ) );
+    }
+});
+
 gulp.task('jsVendors', function () {
     for( var i = 0; i < paths.jsVendors.length; i++ ){
         gulp.src( paths.jsVendors[ i ])
@@ -106,6 +130,10 @@ gulp.task('pictures', function() {
         .pipe(imagemin({optimizationLevel: 5}))
         .pipe(gulp.dest('dist/app/pic'));
 });
+gulp.task('rxjs', function() {
+    return gulp.src(paths.rxjs)
+        .pipe(gulp.dest('dist/app/js/rxjs'));
+});
 
 gulp.task('php', function() {
     return gulp.src(paths.php)
@@ -119,7 +147,7 @@ gulp.task('fonts', function () {
 });
 
 function serve() {
-    return run( 'styles', 'ts', 'templates', 'jsVendors', 'images', 'pictures', 'views', 'php', 'fonts', 'serve');
+    return run( 'styles',  'templates', 'ts','rxjs','angular', 'jsVendors', 'images', 'pictures', 'views', 'php', 'fonts', 'serve');
 }
 
 gulp.task('default', ['clean'], serve());

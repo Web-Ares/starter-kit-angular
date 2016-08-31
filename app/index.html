@@ -6,27 +6,15 @@
     <!-- 1. Load libraries -->
 
     <!-- IE required polyfills, in this exact order -->
-    <script src="app/js/vendors/es6-shim.min.js"></script>
-    <script src="app/js/vendors/system-polyfills.js"></script>
-    <script src="app/js/vendors/shims_for_IE.js"></script>
-    <script src="app/js/vendors/angular2-polyfills.min.js"></script>
-    <script src="app/js/vendors/system.js"></script>
-    <script src="app/js/vendors/typescript.js"></script>
-    <script src="app/js/vendors/Rx.min.js"></script>
-    <script src="app/js/vendors/angular2.dev.js"></script>
+    <script src="app/js/vendors/shim.min.js"></script>
+    <script src="app/js/vendors/zone.js"></script>
+    <script src="app/js/vendors/Reflect.js"></script>
+    <script src="app/js/vendors/system.src.js"></script>
 
 
+    <script src="app/js/vendors/systemjs.config.js"></script>
     <script>
-        System.config({
-            packages: {
-                app: {
-                    format: 'register',
-                    defaultExtension: 'js'
-                }
-            }
-        });
-        System.import('app/js/main')
-                .then(null, console.error.bind(console));
+        System.import('app').catch(function(err){ console.error(err); });
     </script>
 </head>
 <!-- 3. Display the application -->
