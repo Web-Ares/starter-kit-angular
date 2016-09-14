@@ -147,7 +147,7 @@ gulp.task('fonts', function () {
 });
 
 function serve() {
-    return run( 'styles',  'templates', 'ts','rxjs','angular', 'jsVendors', 'images', 'pictures', 'views', 'php', 'fonts', 'serve');
+    return run( 'styles',  'templates', 'jsVendors', 'images', 'pictures', 'views', 'php', 'fonts', 'ts','rxjs','angular', 'serve');
 }
 
 gulp.task('default', ['clean'], serve());
