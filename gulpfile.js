@@ -103,11 +103,13 @@ gulp.task('jsVendors', function () {
 });
 
 gulp.task('ts', function() {
-    var tsResult = tsProject.src( paths.ts )
+    var tsResult = tsProject.src( paths.ts, {
+        base: 'dist'
+    } )
         .pipe(ts(tsProject));
 
     return tsResult.js
-        .pipe(gulp.dest('dist/app/js'));
+        .pipe(gulp.dest('dist'));
 });
 
 gulp.task('watch', function() {
@@ -115,8 +117,8 @@ gulp.task('watch', function() {
     gulp.watch(paths.templates, [ 'templates',  browserSync.reload ]);
     gulp.watch(paths.styles,    [ 'styles',     browserSync.reload ]);
     gulp.watch(paths.views,     [ 'views',      browserSync.reload ]);
-    gulp.watch(paths.images,     [ 'images',      browserSync.reload ]);
-    gulp.watch(paths.php,     [ 'php',      browserSync.reload ]);
+    gulp.watch(paths.images,    [ 'images',     browserSync.reload ]);
+    gulp.watch(paths.php,       [ 'php',        browserSync.reload ]);
 });
 
 gulp.task('images', function() {
