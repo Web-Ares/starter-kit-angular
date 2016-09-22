@@ -21,23 +21,23 @@ var paths = {
     angular: [
         {
             from: 'node_modules/@angular/platform-browser-dynamic/bundles/platform-browser-dynamic.umd.js',
-            to: 'dist/app/js/@angular/platform-browser-dynamic/bundles/'
+            to: 'dist/app/ts/@angular/platform-browser-dynamic/bundles/'
         },
         {
             from: 'node_modules/@angular/compiler/bundles/compiler.umd.js',
-            to: 'dist/app/js/@angular/compiler/bundles/'
+            to: 'dist/app/ts/@angular/compiler/bundles/'
         },
         {
             from: 'node_modules/@angular/core/bundles/core.umd.js',
-            to: 'dist/app/js/@angular/core/bundles/'
+            to: 'dist/app/ts/@angular/core/bundles/'
         },
         {
             from: 'node_modules/@angular/platform-browser/bundles/platform-browser.umd.js',
-            to: 'dist/app/js/@angular/platform-browser/bundles/'
+            to: 'dist/app/ts/@angular/platform-browser/bundles/'
         },
         {
             from: 'node_modules/@angular/common/bundles/common.umd.js',
-            to: 'dist/app/js/@angular/common/bundles/'
+            to: 'dist/app/ts/@angular/common/bundles/'
         }
     ],
     jsVendors: [
@@ -46,7 +46,7 @@ var paths = {
         'node_modules/zone.js/dist/zone.js',
         'node_modules/reflect-metadata/Reflect.js',
         'node_modules/systemjs/dist/system.src.js',
-        'systemjs.config.js'
+        'system.config.js'
     ],
     ts: 'app/ts/**/*.ts',
     fonts: 'app/fonts/**/*'
@@ -103,13 +103,9 @@ gulp.task('jsVendors', function () {
 });
 
 gulp.task('ts', function() {
-    var tsResult = tsProject.src( paths.ts, {
-        base: 'dist'
-    } )
-        .pipe(ts(tsProject));
-
-    return tsResult.js
-        .pipe(gulp.dest('dist'));
+    tsProject.src( paths.ts )
+        .pipe(ts(tsProject)).js
+        .pipe(gulp.dest("dist"));
 });
 
 gulp.task('watch', function() {
@@ -134,7 +130,7 @@ gulp.task('pictures', function() {
 });
 gulp.task('rxjs', function() {
     return gulp.src(paths.rxjs)
-        .pipe(gulp.dest('dist/app/js/rxjs'));
+        .pipe(gulp.dest('dist/app/ts/rxjs'));
 });
 
 gulp.task('php', function() {
