@@ -9,6 +9,7 @@ var ts              = require('gulp-typescript');
 var imagemin        = require('gulp-imagemin');
 var browserSync     = require('browser-sync').create();
 var del             = require('del');
+var modRewrite = require('connect-modrewrite');
 
 var paths = {
     views: 'app/*.html',
@@ -18,26 +19,39 @@ var paths = {
     pictures: 'app/pic/**/*',
     php: 'app/php/**/*',
     rxjs: 'node_modules/rxjs/**/*.js',
+    oauth2: 'node_modules/angular2-oauth2/*.js',
     angular: [
         {
             from: 'node_modules/@angular/platform-browser-dynamic/bundles/platform-browser-dynamic.umd.js',
-            to: 'dist/app/ts/@angular/platform-browser-dynamic/bundles/'
+            to: 'dist/app/js/@angular/platform-browser-dynamic/bundles/'
         },
         {
             from: 'node_modules/@angular/compiler/bundles/compiler.umd.js',
-            to: 'dist/app/ts/@angular/compiler/bundles/'
+            to: 'dist/app/js/@angular/compiler/bundles/'
         },
         {
             from: 'node_modules/@angular/core/bundles/core.umd.js',
-            to: 'dist/app/ts/@angular/core/bundles/'
+            to: 'dist/app/js/@angular/core/bundles/'
         },
         {
             from: 'node_modules/@angular/platform-browser/bundles/platform-browser.umd.js',
-            to: 'dist/app/ts/@angular/platform-browser/bundles/'
+            to: 'dist/app/js/@angular/platform-browser/bundles/'
         },
         {
             from: 'node_modules/@angular/common/bundles/common.umd.js',
-            to: 'dist/app/ts/@angular/common/bundles/'
+            to: 'dist/app/js/@angular/common/bundles/'
+        },
+        {
+            from: 'node_modules/@angular/forms/bundles/forms.umd.js',
+            to: 'dist/app/js/@angular/forms/bundles/'
+        },
+        {
+            from: 'node_modules/@angular/router/bundles/router.umd.js',
+            to: 'dist/app/js/@angular/router/bundles/'
+        },
+        {
+            from: 'node_modules/@angular/http/bundles/http.umd.js',
+            to: 'dist/app/js/@angular/http/bundles/'
         }
     ],
     jsVendors: [
@@ -46,7 +60,11 @@ var paths = {
         'node_modules/zone.js/dist/zone.js',
         'node_modules/reflect-metadata/Reflect.js',
         'node_modules/systemjs/dist/system.src.js',
+        'node_modules/perfect-scrollbar/dist/js/perfect-scrollbar.js',
         'system.config.js'
+    ],
+    cssVendors: [
+        'node_modules/perfect-scrollbar/dist/css/perfect-scrollbar.min.css'
     ],
     ts: 'app/ts/**/*.ts',
     fonts: 'app/fonts/**/*'
@@ -60,21 +78,30 @@ gulp.task('clean', function (cb) {
 
 gulp.task('serve', ['watch'], function() {
     browserSync.init({
-        server: 'dist'
+        port: 3010,
+        server: {
+            baseDir: 'dist',
+
+            middleware: [
+                modRewrite([
+                    '!\\.\\w+$ /index.html [L]'
+                ])
+            ]
+        }
     });
 });
 
 gulp.task('views', function () {
     return gulp.src(paths.views, {
-            base: 'app'
-        })
+        base: 'app'
+    })
         .pipe(gulp.dest('dist'));
 });
 
 gulp.task('templates', function () {
     return gulp.src(paths.templates, {
-            base: 'app'
-        })
+        base: 'app'
+    })
         .pipe(gulp.dest('dist/app'));
 });
 
@@ -102,10 +129,19 @@ gulp.task('jsVendors', function () {
     }
 });
 
+gulp.task('cssVendors', function () {
+    for( var i = 0; i < paths.cssVendors.length; i++ ){
+        gulp.src( paths.cssVendors[ i ])
+            .pipe( gulp.dest('dist/app/css/vendors') );
+    }
+});
+
 gulp.task('ts', function() {
-    tsProject.src( paths.ts )
-        .pipe(ts(tsProject)).js
-        .pipe(gulp.dest("dist"));
+    var tsResult = tsProject.src( paths.ts )
+        .pipe(ts(tsProject));
+
+    return tsResult.js
+        .pipe(gulp.dest('dist/app/js'));
 });
 
 gulp.task('watch', function() {
@@ -113,8 +149,9 @@ gulp.task('watch', function() {
     gulp.watch(paths.templates, [ 'templates',  browserSync.reload ]);
     gulp.watch(paths.styles,    [ 'styles',     browserSync.reload ]);
     gulp.watch(paths.views,     [ 'views',      browserSync.reload ]);
-    gulp.watch(paths.images,    [ 'images',     browserSync.reload ]);
-    gulp.watch(paths.php,       [ 'php',        browserSync.reload ]);
+    gulp.watch(paths.images,     [ 'images',      browserSync.reload ]);
+    gulp.watch(paths.pictures,     [ 'pictures',      browserSync.reload ]);
+    gulp.watch(paths.php,     [ 'php',      browserSync.reload ]);
 });
 
 gulp.task('images', function() {
@@ -130,7 +167,7 @@ gulp.task('pictures', function() {
 });
 gulp.task('rxjs', function() {
     return gulp.src(paths.rxjs)
-        .pipe(gulp.dest('dist/app/ts/rxjs'));
+        .pipe(gulp.dest('dist/app/js/rxjs'));
 });
 
 gulp.task('php', function() {
@@ -144,8 +181,13 @@ gulp.task('fonts', function () {
     }).pipe(gulp.dest('dist/app/fonts'));
 });
 
+gulp.task('oauth2', function() {
+    return gulp.src(paths.oauth2)
+        .pipe(gulp.dest('dist/app/js/oauth2'));
+});
+
 function serve() {
-    return run( 'styles',  'templates', 'ts','rxjs','angular', 'jsVendors', 'images', 'pictures', 'views', 'php', 'fonts', 'serve');
+    return run( 'styles',  'templates', 'oauth2', 'ts','rxjs','angular', 'cssVendors', 'jsVendors', 'images', 'pictures', 'views', 'php', 'fonts', 'serve');
 }
 
 gulp.task('default', ['clean'], serve());
