@@ -1,6 +1,2 @@
-
-<!-- site -->
-<div class="site">
-    <h1>My First Angular 2 App</h1>
-</div>
-<!-- /site -->
+<login *ngIf="!token"></login>
+<dashboard *ngIf="token" [token]="token" (setTokenToNull)="logout($event)"></dashboard>
