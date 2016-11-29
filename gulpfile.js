@@ -19,7 +19,6 @@ var paths = {
     pictures: 'app/pic/**/*',
     php: 'app/php/**/*',
     rxjs: 'node_modules/rxjs/**/*.js',
-    oauth2: 'node_modules/angular2-oauth2/*.js',
     angular: [
         {
             from: 'node_modules/@angular/platform-browser-dynamic/bundles/platform-browser-dynamic.umd.js',
@@ -181,13 +180,8 @@ gulp.task('fonts', function () {
     }).pipe(gulp.dest('dist/app/fonts'));
 });
 
-gulp.task('oauth2', function() {
-    return gulp.src(paths.oauth2)
-        .pipe(gulp.dest('dist/app/js/oauth2'));
-});
-
 function serve() {
-    return run( 'styles',  'templates', 'oauth2', 'ts','rxjs','angular', 'cssVendors', 'jsVendors', 'images', 'pictures', 'views', 'php', 'fonts', 'serve');
+    return run( 'styles',  'templates', 'ts','rxjs','angular', 'cssVendors', 'jsVendors', 'images', 'pictures', 'views', 'php', 'fonts', 'serve');
 }
 
 gulp.task('default', ['clean'], serve());
