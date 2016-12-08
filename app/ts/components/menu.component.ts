@@ -1,12 +1,26 @@
-import {Component} from '@angular/core';
+import {Component, Input} from '@angular/core';
 
 const TEXT: Object = {
-    response_type: 'code',
-    access_type: 'offline',
-    approval_prompt: 'force',
-    client_id: '342787047268-78asn05bdhvl4t99cgpt7f1ijulsson8.apps.googleusercontent.com',
-    redirect_uri: 'http://localhost:3010',
-    scope: 'https://www.googleapis.com/auth/userinfo.email'
+    en: [
+        {
+            text: 'Works',
+            url: 'works'
+        },
+        {
+            text: 'Users',
+            url: 'users'
+        }
+    ],
+    ru: [
+        {
+            text: 'Робота',
+            url: 'works'
+        },
+        {
+            text: 'Юзеры',
+            url: 'users'
+        }
+    ]
 };
 
 @Component({
@@ -15,5 +29,17 @@ const TEXT: Object = {
     styleUrls: ['app/css/menu.component.css']
 })
 export class MenuComponent {
+
+    @Input() settings:string;
+
+    texts:Object[] =[3,4];
+
+    ngOnInit(){
+
+
+        this.texts = TEXT[ this.settings[ 'language' ] ];
+
+    }
+
 
 }

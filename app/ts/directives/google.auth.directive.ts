@@ -9,9 +9,12 @@ const OAUTH: Object = {
         scope: 'https://www.googleapis.com/auth/userinfo.email'
 };
 
-@Directive({selector: '[googleAuth]'})
+@Directive({
+    selector: '[googleAuth]'
+})
 export class GoogleAuthDirective {
-    constructor(el: ElementRef) {
+
+    constructor( el: ElementRef ) {
         el.nativeElement.href = this.getLink();
     }
 

@@ -1,5 +1,7 @@
+import { AppRoutingModule }        from "./app.routing.module";
 import { BrowserModule }           from '@angular/platform-browser';
-import { NgModule }                from '@angular/core';
+import { NgModule, enableProdMode }                from '@angular/core';
+// enableProdMode();
 
 import { AppComponent }            from '../components/app.component';
 import { DashboardComponent }      from "../components/dashboard.component";
@@ -9,8 +11,11 @@ import { MenuComponent }           from "../components/menu.component";
 import { GoogleAuthDirective }     from "../directives/google.auth.directive";
 import { PerfectScrollDirective }  from "../directives/perfect.scroll.directive";
 
+import { SettingsBindingService }      from "../services/settings.binding.service";
+
 @NgModule({
     imports:      [
+        AppRoutingModule,
         BrowserModule
     ],
     declarations: [
@@ -21,6 +26,9 @@ import { PerfectScrollDirective }  from "../directives/perfect.scroll.directive"
 
         GoogleAuthDirective,
         PerfectScrollDirective
+    ],
+    providers: [
+        SettingsBindingService
     ],
     bootstrap:    [ AppComponent ]
 })

@@ -1,3 +1,9 @@
 <div class="menu">
 
+    <a class="menu__item"
+       *ngFor="let item of texts"
+       routerLink="/{{item.url}}">
+        {{item.text}}
+    </a>
+
 </div>

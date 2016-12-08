@@ -6,6 +6,9 @@ import {Component} from '@angular/core';
 })
 export class AppComponent {
     token:string;
+    settings = {
+        language: 'en'
+    };
 
     constructor(){
 

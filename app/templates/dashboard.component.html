@@ -5,9 +5,11 @@
     </div>
 
     <div class="dashboard__menu" perfectScroll>
-        <menu></menu>
+        <menu [settings]="settings"></menu>
     </div>
 
-    <div class="dashboard__content" perfectScroll></div>
+    <div class="dashboard__content" perfectScroll>
+        <router-outlet></router-outlet>
+    </div>
 
 </div>

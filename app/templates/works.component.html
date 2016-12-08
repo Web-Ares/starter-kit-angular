@@ -1,0 +1,11 @@
+<div class="works">
+
+    <div class="works__menu">
+        <a *ngFor="let item of texts" routerLink="/{{item.url}}">{{item.text}}</a>
+    </div>
+
+    <div class="works__content">
+        <router-outlet></router-outlet>
+    </div>
+
+</div>

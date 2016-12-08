@@ -1,2 +1,6 @@
 <login *ngIf="!token"></login>
-<dashboard *ngIf="token" [token]="token" (setTokenToNull)="logout($event)"></dashboard>
+<dashboard
+        *ngIf="token"
+        [token]="token"
+        [settings]="settings"
+        (setTokenToNull)="logout($event)"></dashboard>

@@ -1,4 +1,6 @@
-import {Component, Input, Output, EventEmitter } from '@angular/core';
+import { Component, Input, Output, EventEmitter }       from '@angular/core';
+
+import { SettingsBindingService }                       from "../services/settings.binding.service";
 
 @Component({
     selector: 'dashboard',
@@ -7,7 +9,16 @@ import {Component, Input, Output, EventEmitter } from '@angular/core';
 })
 export class DashboardComponent {
     @Input() token:string;
+    @Input() settings:string;
+
     @Output() setTokenToNull: EventEmitter<any> = new EventEmitter();
+
+    constructor( private settingsBindService: SettingsBindingService ){
+        this.settingsBindService.getSettings$.subscribe(
+            settings => {
+                this.settingsBindService.sendSettings( this.settings );
+            });
+    }
 
     logout():void {
 
