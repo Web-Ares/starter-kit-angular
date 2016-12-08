@@ -136,8 +136,8 @@ gulp.task('cssVendors', function () {
 });
 
 gulp.task('ts', function() {
-    var tsResult = tsProject.src( paths.ts )
-        .pipe(ts(tsProject));
+    var tsResult = gulp.src( paths.ts )
+        .pipe(tsProject());
 
     return tsResult.js
         .pipe(gulp.dest('dist/app/js'));
