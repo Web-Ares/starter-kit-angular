@@ -1,5 +1,7 @@
-import {Component} from '@angular/core';
-import {WeatherListComponent} from "./weather/weather-list.component";
+import {Component, Injectable} from '@angular/core';
+
+
+@Injectable()
 @Component({
     selector: 'my-app',
     templateUrl: 'app/templates/app.component.html',

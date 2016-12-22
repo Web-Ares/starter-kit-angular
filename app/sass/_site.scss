@@ -6,7 +6,9 @@
   header{
     height: 80px;
     background: #4a90e2;
-    padding: 25px 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 
     h1{
       color: white;
@@ -35,12 +37,51 @@
     content: '';
   }
 
+  .site__content{
+    margin: 5% 0;
+  }
+
 }
 
 .site:after{
   content: '';
 }
 
+.weather-search-form {
+  margin: 0 5% 40px;
+  text-align: center;
+}
+
+.weather-search-form input{
+  border: 1px solid #4a90e2;
+}
+
+.weather-search-result{
+  margin: 0 5%;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+   button {
+    margin-top: -15px;
+
+  }
+
+  div {
+    display: inline-block;
+    width: 250px;
+    height: 25px;
+  }
+
+  .cityName{
+
+    font-style: italic;
+
+  }
+
+
+}
 
 section.weather-list {
   padding: 5%;
@@ -61,6 +102,16 @@ article {
 
 }
 
+button {
+  background: #4a90e2;
+  border: none;
+  color: white;
+  box-shadow: 2px 2px black;
+}
+
+button:hover {
+  background: #4A90AA;
+}
 
 @media (min-width: $phone-landscape) {
   .site {
