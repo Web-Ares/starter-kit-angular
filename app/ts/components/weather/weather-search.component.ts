@@ -30,9 +30,9 @@ export class WeatherSearchComponent{
 
     cityName : string = 'City Name';
 
+    
     weatherItem : WeatherItem;
-    
-    
+
     constructor(private weatherservice : WeatherService){
 
     }

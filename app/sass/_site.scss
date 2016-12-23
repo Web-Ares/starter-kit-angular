@@ -1,7 +1,7 @@
 .site {
   @include justify;
 
-  height: 100%;
+  position: relative;
 
   header{
     height: 80px;
