@@ -1,7 +1,85 @@
 .site {
   @include justify;
 
+  .tic-tac{
+    margin: 20px;
+  }
+
+  .tic-tac td {
+    width: 100px;
+    height: 100px;
+    border: 1px dashed black;
+  }
+
+  .tic-tac span {
+
+    display: inline-block;
+    position: relative;
+    width: 80px;
+    height: 80px;
+    margin-left: 10px;
+    margin-top: 10px;
+  }
+
+  .test-block{
+    display: inline-block;
+    height: 100px;
+    width: 100px;
+    background: red;
+
+
+
+  }
+
 }
+
+ .cross:before, .cross:after {
+ position: absolute;
+ background-color: #00AA00;
+ content: '';
+ height: 100%;
+ width: 15px;
+
+}
+
+.cross:before{
+  right: 50%;
+  -ms-transform: rotate(45deg);
+  -webkit-transform: rotate(45deg);
+  transform: rotate(45deg);
+
+}
+
+ .cross:after {
+  left: 50%;
+   -ms-transform: rotate(135deg);
+   -webkit-transform: rotate(135deg);
+   transform: rotate(135deg);
+}
+
+ .zero {
+   position: relative;
+   background-color: #00AA00;
+   border-radius: 46px;
+ }
+.zero:before {
+  position: absolute;
+  content: '';
+  background-color: #fff;
+  width: 80%;
+  height: 80%;
+  border-radius: 37px;
+  margin-left: 5px;
+  margin-top: 5px;
+}
+
+.result {
+  color: #00AA00;
+  font-size: 200%;
+  font-style: italic;
+}
+
+
 @media (min-width: $phone-landscape) {
   .site {
 
