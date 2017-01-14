@@ -205,6 +205,7 @@ export class SnakeComponent {
                         }
 
                     }
+                        
                     else if(this.desk[i][j] == 1000){
 
                         this.desk[this.head[0]][this.head[1]] = 1;
