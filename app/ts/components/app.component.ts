@@ -30,11 +30,7 @@ export class AppComponent {
     winnerFlag : boolean;
 
     congrats : string;
-
-    ngOnInit(){
-        console.log(this.desk);
-    }
-
+    
     setStep(i: string, j: string){
         this.flag = !this.flag;
 

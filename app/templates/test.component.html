@@ -1,3 +1,11 @@
-<div class="test-block">
-    Test Block Animation
-</div>
+<table class="tic-tac snike" id="snake">
+
+    <tr *ngFor="let tr of desk">
+        <td *ngFor="let td of tr" [class.snike-head]="td==1" [class.snike-body]="td>0" [class.snike-food]="td==-1">
+
+        </td>
+    </tr>
+
+</table>
+
+<button type="button" (click)="startGame()">Start</button>

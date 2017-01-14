@@ -1,26 +1,31 @@
 
 <!-- site -->
 <div class="site">
-    <h1>Tic Tac Toe</h1>
+    <!--<h1>Tic Tac Toe</h1>-->
 
-    <button (click)="doRefresh()">Again!</button>
+    <!--<button (click)="doRefresh()">Again!</button>-->
 
 
-    <table class="tic-tac" id="tac">
+    <!--<table class="tic-tac" id="tac">-->
 
-        <tr *ngFor="let tr of desk; let i = index">
+        <!--<tr *ngFor="let tr of desk; let i = index">-->
 
-            <td *ngFor="let td of tr; let j =  index" (click)="setStep(i,j)">
-                <span  *ngIf="td == 'x'" class="cross"></span>
-                <span  *ngIf="td == 'o'" class="zero"></span>
-            </td>
-        </tr>
+            <!--<td *ngFor="let td of tr; let j =  index" (click)="setStep(i,j)">-->
+                <!--<span  *ngIf="td == 'x'" class="cross"></span>-->
+                <!--<span  *ngIf="td == 'o'" class="zero"></span>-->
+            <!--</td>-->
+        <!--</tr>-->
 
-    </table>
+    <!--</table>-->
+
+
+
+<!--<div  *ngIf="congrats == 'x'|| congrats == 'o'" class="congrats">-->
+    <!--THE <span class="result">{{congrats}}</span> IS WINNER, CLICK ON "AGAIN!"-->
+<!--</div>-->
+
+
+    <snake>....</snake>
+
 </div>
 <!-- /site -->
-
-
-<div  *ngIf="congrats == 'x'|| congrats == 'o'" class="congrats">
-    THE <span class="result">{{congrats}}</span> IS WINNER, CLICK ON "AGAIN!"
-</div>

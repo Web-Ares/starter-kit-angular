@@ -1,8 +1,12 @@
+
 .site {
   @include justify;
+  overflow: hidden;
+}
 
   .tic-tac{
     margin: 20px;
+    overflow: hidden !important;
   }
 
   .tic-tac td {
@@ -31,7 +35,7 @@
 
   }
 
-}
+
 
  .cross:before, .cross:after {
  position: absolute;
@@ -77,6 +81,32 @@
   color: #00AA00;
   font-size: 200%;
   font-style: italic;
+}
+
+.snike td{
+  position: relative;
+  width: 80px;
+  height: 80px;
+}
+
+
+.snike td.snike-body {
+  background-color: #00AA00;
+}
+
+.snike td.snike-head {
+  position: relative;
+  background-color: #00Afff;
+}
+
+
+
+.snike td.snike-food{
+  background-color: red;
+}
+
+.snike td.snike-tail{
+  background-color: orange;
 }
 
 
