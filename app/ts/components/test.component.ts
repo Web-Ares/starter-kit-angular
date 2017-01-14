@@ -11,7 +11,7 @@ import {Component} from '@angular/core';
 
 export class SnakeComponent {
 
-    speed : number = 100;
+    speed : number = 150;
 
     inGameFlag : boolean = false;
 
@@ -28,7 +28,7 @@ export class SnakeComponent {
         [0,0,4,3,2,1,0,0,0,0],
         [0,0,0,0,0,0,0,0,0,0],
         [0,0,0,0,0,0,0,0,0,0],
-        [0,0,0,0,0,0,-1,0,0,0],
+        [0,0,0,0,0,0,0,0,0,0],
         [0,0,0,0,0,0,0,0,0,0]
     ];
 
@@ -43,6 +43,8 @@ export class SnakeComponent {
     tail : number =  4;
 
     totalScore : number = 0;
+
+    foodFlag : boolean = false;
 
     constructor(){
 
@@ -115,30 +117,26 @@ export class SnakeComponent {
     startGame(){
         this.inGameFlag = !this.inGameFlag;
         this.lastStepTime = this.currentTime - this.speed;
+
+        this.desk  = [
+            [0,0,0,0,0,0,0,0,0,0],
+            [0,0,0,0,0,0,0,0,0,0],
+            [0,0,0,0,0,0,0,0,0,0],
+            [0,0,0,0,0,0,0,0,0,0],
+            [0,0,0,0,0,0,0,0,0,0],
+            [0,0,4,3,2,1,0,0,0,0],
+            [0,0,0,0,0,0,0,0,0,0],
+            [0,0,0,0,0,0,0,0,0,0],
+            [0,0,0,0,0,0,0,0,0,0],
+            [0,0,0,0,0,0,0,0,0,0]
+        ];
+        this.setFood();
     }
 
     step(){
 
         let i : number,
             j : number;
-
-        for(i = 0; i<=9; i++){
-
-            for(j = 0; j<=9; j++){
-
-                if( this.desk[i][j] > 0 ){
-
-                    if(this.desk[i][j] == this.tail){
-                        this.desk[i][j] = 0;
-                    } else {
-                        this.desk[i][j]++;
-                    }
-
-                }
-
-            }
-
-        }
 
         switch (this.direction){
 
@@ -177,9 +175,79 @@ export class SnakeComponent {
 
         }
 
-        this.desk[this.head[0]][this.head[1]] = 1;
+        if( this.desk[this.head[0]][this.head[1]] == -1 ){
+            console.log('was eating');
+            this.totalScore++;
+            this.foodFlag = true;
+        }
+
+        this.desk[this.head[0]][this.head[1]] = 1000;
+
+        for(i = 0; i<=9; i++){
+
+            for(j = 0; j<=9; j++){
+
+                if( this.desk[i][j] > 0 ){
+
+                    if(this.desk[i][j] == this.tail){
+
+                        if(this.foodFlag){
+
+                            this.foodFlag = false;
+                            this.tail = this.tail+1;
+                            this.desk[i][j] = this.tail;
+                            this.setFood();
+
+                        } else {
+
+                            this.desk[i][j] = 0;
+
+                        }
+
+                    }
+                    else if(this.desk[i][j] == 1000){
+
+                        this.desk[this.head[0]][this.head[1]] = 1;
+
+                    }
+                    else {
+
+                        this.desk[i][j]++;
+
+                    }
+
+                }
+            }
+
+        }
 
 
     }
+
+    setFood(){
+
+        let i : number,
+            j : number,
+            setFoodFlag : boolean = true;
+
+            i = Math.floor(Math.random() * 6) + 1;
+
+
+        do
+        {
+            i = Math.floor(Math.random() * 10);
+            j = Math.floor(Math.random() * 10);
+
+            if( this.desk[i][j] == 0 ){
+                setFoodFlag = !setFoodFlag;
+                this.desk[i][j] = -1;
+            }
+
+        }
+        while( setFoodFlag );
+
+
+    }
+
 
 }
