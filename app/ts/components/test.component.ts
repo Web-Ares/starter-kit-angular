@@ -115,7 +115,9 @@ export class SnakeComponent {
     }
 
     startGame(){
+
         this.inGameFlag = !this.inGameFlag;
+
         this.lastStepTime = this.currentTime - this.speed;
 
         this.desk  = [
@@ -130,6 +132,19 @@ export class SnakeComponent {
             [0,0,0,0,0,0,0,0,0,0],
             [0,0,0,0,0,0,0,0,0,0]
         ];
+
+        this.direction  =  1;
+
+        this.keysInWork  = false;
+
+        this.head  = [5,5];
+
+        this.tail  =  4;
+
+        this.totalScore = 0;
+
+        this.foodFlag  = false;
+
         this.setFood();
     }
 
@@ -181,6 +196,14 @@ export class SnakeComponent {
             this.foodFlag = true;
         }
 
+        if( this.desk[this.head[0]][this.head[1]] > 0 && this.desk[this.head[0]][this.head[1]]!=this.tail ){
+            console.log(this.desk[this.head[0]][this.head[1]]);
+            console.log(this.tail);
+            console.log('YOU LOOSE');
+            this.startGame();
+        }
+
+        
         this.desk[this.head[0]][this.head[1]] = 1000;
 
         for(i = 0; i<=9; i++){
