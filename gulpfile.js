@@ -75,7 +75,7 @@ gulp.task('clean', function (cb) {
     return del('dist', cb);
 });
 
-gulp.task('serve', ['watch'], function() {
+gulp.task('serve', function() {
     browserSync.init({
         port: 3010,
         server: {
@@ -108,7 +108,7 @@ gulp.task('styles', function () {
     return gulp.src(paths.styles)
         .pipe(sourcemaps.init())
         .pipe(sass({outputStyle: 'compressed'}).on('error', sass.logError))
-        .pipe(autoprefixer({ browsers: ['last 2 versions'] }))
+        // .pipe(autoprefixer({ browsers: ['last 2 versions'] }))
         .pipe(sourcemaps.write())
         .pipe(gulp.dest('dist/app/css'))
         .pipe(browserSync.stream());
@@ -181,7 +181,7 @@ gulp.task('fonts', function () {
 });
 
 function serve() {
-    return run( 'styles',  'templates', 'ts','rxjs','angular', 'cssVendors', 'jsVendors', 'images', 'pictures', 'views', 'php', 'fonts', 'serve');
+    return run( 'styles', 'templates', 'ts', 'angular', 'rxjs', 'cssVendors', 'jsVendors', 'images', 'pictures', 'views', 'php', 'fonts', 'serve', 'watch');
 }
 
 gulp.task('default', ['clean'], serve());
