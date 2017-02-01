@@ -13,22 +13,22 @@
             // our app is within the app folder
             app: 'app',
             // angular bundles
-            '@angular/core': 'app/ts/@angular/core/bundles/core.umd.js',
-            '@angular/common': 'app/ts/@angular/common/bundles/common.umd.js',
-            '@angular/compiler': 'app/ts/@angular/compiler/bundles/compiler.umd.js',
-            '@angular/platform-browser': 'app/ts/@angular/platform-browser/bundles/platform-browser.umd.js',
-            '@angular/platform-browser-dynamic': 'app/ts/@angular/platform-browser-dynamic/bundles/platform-browser-dynamic.umd.js',
-            '@angular/http': 'app/ts/@angular/http/bundles/http.umd.js',
-            '@angular/router': 'app/ts/@angular/router/bundles/router.umd.js',
-            '@angular/forms': 'app/ts/@angular/forms/bundles/forms.umd.js',
+            '@angular/core': 'app/js/@angular/core/bundles/core.umd.js',
+            '@angular/common': 'app/js/@angular/common/bundles/common.umd.js',
+            '@angular/compiler': 'app/js/@angular/compiler/bundles/compiler.umd.js',
+            '@angular/platform-browser': 'app/js/@angular/platform-browser/bundles/platform-browser.umd.js',
+            '@angular/platform-browser-dynamic': 'app/js/@angular/platform-browser-dynamic/bundles/platform-browser-dynamic.umd.js',
+            '@angular/http': 'app/js/@angular/http/bundles/http.umd.js',
+            '@angular/router': 'app/js/@angular/router/bundles/router.umd.js',
+            '@angular/forms': 'app/js/@angular/forms/bundles/forms.umd.js',
             // other libraries
-            'rxjs':                       'app/ts/rxjs'//,
+            'rxjs':                       'app/js/rxjs'
             // 'angular2-in-memory-web-api': 'node_modules/angular2-in-memory-web-api',
         },
         // packages tells the System loader how to load when no filename and/or no extension
         packages: {
             app: {
-                main: './ts/main.js',
+                main: './js/main.js',
                 defaultExtension: 'js'
             },
             rxjs: {
@@ -41,4 +41,3 @@
         }
     });
 })(this);
-
