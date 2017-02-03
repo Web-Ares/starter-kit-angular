@@ -1,7 +1,12 @@
-import {Component} from '@angular/core';
+import { Component } from '@angular/core';
+
 @Component({
-    selector: 'my-app',
+    selector: 'app',
     templateUrl: 'app/templates/app.component.html',
     styleUrls: [ 'app/css/app.component.css' ]
 })
-export class AppComponent { }
+export class AppComponent {
+
+    public data = {}
+
+}
