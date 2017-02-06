@@ -1,0 +1,10 @@
+<div class="heroes-list">
+
+    <div class="hero-single"  *ngFor="let user of Users"  (click)="selectUser( user )">
+        <div>{{ user.username }}</div>
+        <div class="photo" [ngStyle]="{'background-image': 'url(' + user.photo + ')'}"></div>
+        <div>Email: {{user.email | lowercase}}</div>
+        <div>Ballance: ${{user.cost}}</div>
+    </div>
+
+</div>

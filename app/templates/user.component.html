@@ -1,0 +1,17 @@
+<div *ngIf="selectedUser" class="heroes-list">
+
+    <div class="hero-single hero-single_inner">
+
+        <div>{{ selectedUser.username }}</div>
+        <input type="text" (input)="username = $event.target.value" [value]="selectedUser.username" />
+        <div class="photo" [ngStyle]="{'background-image': 'url(' + selectedUser.photo + ')'}"></div>
+        <div>Email: {{selectedUser.email}}</div>
+        <input type="text" name="email" />
+        <div>Ballance: ${{selectedUser.cost}}</div>
+        <input type="text" name="ballance" />
+
+    </div>
+
+
+
+</div>

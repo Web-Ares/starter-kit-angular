@@ -181,7 +181,7 @@ gulp.task('fonts', function () {
 });
 
 function serve() {
-    return run( 'styles', 'templates', 'ts', 'angular', 'rxjs', 'cssVendors', 'jsVendors', 'images', 'pictures', 'views', 'php', 'fonts', 'serve', 'watch');
+    return run( 'styles', 'templates', 'ts', 'angular', 'rxjs', 'cssVendors','jsVendors', 'images', 'pictures', 'views', 'php', 'fonts', 'serve', 'watch');
 }
 
 gulp.task('default', ['clean'], serve());
